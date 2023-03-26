@@ -35,7 +35,7 @@ static int parce_args(short *mask,int ac, char **av)
 {
     int pid = 0;
 
-     for (int opt = 0; (opt = getopt(ac, av, "p:s")) != -1;) {
+    for (int opt = 0; (opt = getopt(ac, av, "p:s")) != -1; ) {
         switch (opt) {
             case 'p':
                 SET_FLAG(*mask, PID_ATTACH);
@@ -63,6 +63,7 @@ int main(int ac, char **av)
     }
     if ((pid = parce_args(&mask, ac, av)) < 0 && CHK_FLAG(mask, PID_ATTACH))
         return EXIT_EPI_FAIL;
-    CHK_FLAG(mask, PID_ATTACH) ? attach_to_pid(mask, pid) : run_command(mask, av + optind);
+    CHK_FLAG(mask, PID_ATTACH) ? attach_to_pid(mask, pid) :
+    run_command(mask, av + optind);
     return 0;
 }

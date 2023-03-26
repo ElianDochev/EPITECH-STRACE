@@ -22,8 +22,7 @@ void run_command(short mask, char **av)
 {
     int pid = 0;
 
-    if (!(pid = fork()))
-    {
+    if (!(pid = fork())) {
         if (ptrace(PTRACE_TRACEME, 0, NULL, NULL) == -1) {
             ERROR("ptrace: %s\n", strerror(errno));
             exit(EXIT_EPI_FAIL);

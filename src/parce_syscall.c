@@ -34,7 +34,7 @@ int error_check(int status, int pid, regs_t *regs)
         perror("ptrace getregs failed");
         return -1;
     }
-    if (!get_global(-1, -1, -1)->running) // this is needed because sometimes it takes a while for the process to exit
+    if (!get_global(-1, -1, -1)->running)
         return -1;
     return 0;
 }

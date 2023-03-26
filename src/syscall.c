@@ -24,6 +24,6 @@ int do_syscall(regs_t *regs, short mask, int pid, int status)
     waitpid(pid, &status, 0);
     if (error_check(status, pid, regs) == -1)
         return -1;
-    syscall.ret_type == VOID ? printf("= ?"): printf("= 0x%lx\n", regs->rax);
+    syscall.ret_type == VOID ? printf("= ?") : printf("= 0x%lx\n", regs->rax);
     return 0;
 }

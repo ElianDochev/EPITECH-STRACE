@@ -141,7 +141,7 @@
     #define EXIT_EPI_FAIL 84
 
 /* ERROR */
-    #define ERROR(...) fprintf(stderr, __VA_ARGS__) && 0
+    #define ERROR(...) (fprintf(stderr, __VA_ARGS__) && 0)
 
 /* syscall table *
     rax - code/ return value
@@ -178,9 +178,13 @@ typedef struct {
 typedef struct user_regs_struct regs_t;
 
 // automate the process so when the arg is of type VOID_P we return the value of that pointer
-void fill_args(syscall_t *syscall, regs_t *regs, arg_array_t *args);
+void fill_args(regs_t *regs, arg_array_t *args);
 void run_command(short mask, char **av);
 void attach_to_pid(short mask, int pid);
+void parce_syscall(short mask, int pid);
+// check if there where any interuption during the syscall and loads registers
+int error_check(int status, int pid, regs_t *regs);
+int do_syscall(regs_t *regs, short mask, int pid, int status);
 
 static const syscall_t table[330] = {{0, "read", 3, NUM, NUM, VOID_P, NUM, 0, 0, 0},
     {1, "write", 3, NUM, NUM, STRING, NUM, 0, 0, 0},

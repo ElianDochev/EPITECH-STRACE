@@ -20,7 +20,7 @@ static global_t *get_global(int running, short mask, int pid)
     return &global;
 }
 
-static int error_check(int status, int pid, regs_t *regs)
+int error_check(int status, int pid, regs_t *regs)
 {
     if (WIFEXITED(status)) {
         printf("process exited\n");
@@ -43,11 +43,11 @@ static void sig_handler(int signo)
 {
     global_t *global = get_global(-1, -1, -1);
 
+    (void) signo;
     if (!CHK_FLAG(global->mask, PID_ATTACH)) {
         kill(global->pid, SIGTERM);
     }
     get_global(0, -1, -1);
-
 }
 
 void parce_syscall(short mask, int pid)
@@ -66,8 +66,10 @@ void parce_syscall(short mask, int pid)
         waitpid(pid, &status, 0);
         if (error_check(status, pid, &regs) == -1)
             break;
-        if (regs.orig_rax != -1)
-            do_syscall(&regs, mask, pid);
+        if (regs.orig_rax == -1)
+            continue;
+        if (do_syscall(&regs, mask, pid, status) == -1)
+            break;
     }
     ptrace(PTRACE_DETACH, pid, NULL, NULL);
 }

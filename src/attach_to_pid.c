@@ -6,6 +6,7 @@
 */
 
 #include "syscall.h"
+#include <string.h>
 
 void attach_to_pid(short mask, int pid)
 {
@@ -35,7 +36,7 @@ void run_command(short mask, char **av)
     }
 }
 
-void fill_args(syscall_t *syscall, struct user_regs_struct *regs, arg_array_t *args)
+void fill_args(regs_t *regs, arg_array_t *args)
 {
     args->array[0] = regs->rdi;
     args->array[1] = regs->rsi;

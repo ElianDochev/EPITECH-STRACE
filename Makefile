@@ -15,7 +15,7 @@ SRC_MAIN = src/main.c
 
 DEBUG = -g3 -Wall -Wextra
 
-CPPFLAGS = -I./headers
+CPPFLAGS = -I./headers -g3 -Wall -Wextra
 
 OBJ	=	$(SRC:.c=.o)
 

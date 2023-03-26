@@ -14,7 +14,7 @@ void attach_to_pid(short mask, int pid)
         exit(EXIT_EPI_FAIL);
     }
     waitpid(pid, NULL, 0);
-    // will continue the process
+    parce_syscall(mask, pid);
 }
 
 void run_command(short mask, char **av)
@@ -35,3 +35,12 @@ void run_command(short mask, char **av)
     }
 }
 
+void fill_args(syscall_t *syscall, struct user_regs_struct *regs, arg_array_t *args)
+{
+    args->array[0] = regs->rdi;
+    args->array[1] = regs->rsi;
+    args->array[2] = regs->rdx;
+    args->array[3] = regs->rcx;
+    args->array[4] = regs->r8;
+    args->array[5] = regs->r9;
+}

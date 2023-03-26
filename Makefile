@@ -7,7 +7,9 @@
 
 NAME	=	strace
 
-SRC	=	src/attach_to_pid.c
+SRC	=	src/attach_to_pid.c		\
+		src/parce_syscall.c		\
+		src/syscall.c
 
 SRC_MAIN = src/main.c
 

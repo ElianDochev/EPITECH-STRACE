@@ -169,10 +169,16 @@ typedef struct {
     intptr_t array[6];
 } arg_array_t;
 
+typedef struct {
+    int running;
+    int pid;
+    short mask;
+} global_t;
+
 typedef struct user_regs_struct regs_t;
 
 // automate the process so when the arg is of type VOID_P we return the value of that pointer
-void parce_syscall(syscall_t *syscall, regs_t *regs, arg_array_t *args);
+void fill_args(syscall_t *syscall, regs_t *regs, arg_array_t *args);
 void run_command(short mask, char **av);
 void attach_to_pid(short mask, int pid);
 

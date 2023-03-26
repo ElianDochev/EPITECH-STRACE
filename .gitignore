@@ -1,0 +1,5 @@
+TESTS
+*.o
+*.a
+a.out
+strace

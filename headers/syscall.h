@@ -18,6 +18,9 @@
     #include <unistd.h>
     #include <errno.h>
     #include <ctype.h>
+    #include <sys/ptrace.h>
+    #include <sys/wait.h>
+    #include <signal.h>
 
     // would want to replace with a enum but no time
     #define     NUM         1
@@ -170,6 +173,8 @@ typedef struct user_regs_struct regs_t;
 
 // automate the process so when the arg is of type VOID_P we return the value of that pointer
 void parce_syscall(syscall_t *syscall, regs_t *regs, arg_array_t *args);
+void run_command(short mask, char **av);
+void attach_to_pid(short mask, int pid);
 
 static const syscall_t table[330] = {{0, "read", 3, NUM, NUM, VOID_P, NUM, 0, 0, 0},
     {1, "write", 3, NUM, NUM, STRING, NUM, 0, 0, 0},

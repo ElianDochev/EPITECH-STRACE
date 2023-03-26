@@ -7,7 +7,7 @@
 
 NAME	=	strace
 
-SRC	=	##
+SRC	=	src/attach_to_pid.c
 
 SRC_MAIN = src/main.c
 
@@ -20,10 +20,6 @@ OBJ	=	$(SRC:.c=.o)
 CC = gcc
 
 OBJ_MAIN = $(SRC_MAIN:.c=.o)
-
-LIB_DIR = ../lib/
-
-CLIB 	= -L$(LIB_DIR) -lmy
 
 TESTS = ##tests/
 
@@ -43,7 +39,7 @@ debug:
 	$(MAKE) CPPFLAGS="$(CPPFLAGS) $(DEBUG)" compile
 
 compile: $(OBJ) $(OBJ_MAIN)
-	$(CC) -o $(NAME) $(OBJ) $(OBJ_MAIN) $(CLIB)
+	$(CC) -o $(NAME) $(OBJ) $(OBJ_MAIN)
 
 makelib:
 	$(MAKE) -C $(LIB_DIR)

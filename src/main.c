@@ -5,7 +5,10 @@
 ** main
 */
 
-#include "syscalls.h"
+#include "syscall.h"
+
+extern char *optarg;
+extern int optind;
 
 static int my_atoi(const char* str)
 {
@@ -18,7 +21,7 @@ static int my_atoi(const char* str)
     }
     while (*str) {
         if (!isdigit(*str)) {
-            printf("Invalid char in string: %c\n", *str);
+            ERROR("Invalid char in string: %c\n", *str);
             errno = EINVAL;
             return -1;
         }

@@ -185,7 +185,7 @@ void parce_syscall(short mask, int pid);
 int error_check(int status, int pid, regs_t *regs);
 int do_syscall(regs_t *regs, short mask, int pid, int status);
 
-static const syscall_t table[330] = {
+static const syscall_t table[] = {
     {0, "read", 3, NUM, NUM, VOID_P, NUM, 0, 0, 0},
     {1, "write", 3, NUM, NUM, STRING, NUM, 0, 0, 0},
     {2, "open", 2, NUM, STRING, NUM, 0, 0, 0, 0},
@@ -454,7 +454,8 @@ static const syscall_t table[330] = {
     {248, "add_key", 5, KEY_SERIAL_T, STRING, STRING, CONST_VOID_P, NUM,
         KEY_SERIAL_T, 0},
     {249, "request_key", 4, KEY_SERIAL_T, STRING, STRING, STRING, KEY_SERIAL_T,
-        0, 0}, {250, "keyctl", 2, NUM, NUM, VARGS, 0, 0, 0, 0},
+        0, 0},
+    {250, "keyctl", 2, NUM, NUM, VARGS, 0, 0, 0, 0},
     {251, "ioprio_set", 3, NUM, NUM, NUM, NUM, 0, 0, 0},
     {252, "ioprio_get", 2, NUM, NUM, NUM, 0, 0, 0, 0},
     {253, "inotify_init", 1, NUM, VOID, 0, 0, 0, 0, 0},
@@ -481,7 +482,8 @@ static const syscall_t table[330] = {
     {273, "set_robust_list", 2, NUM, STRUCT_ROBUST_LIST_HEAD_P, NUM, 0, 0, 0,
         0},
     {274, "get_robust_list", 3, NUM, NUM, STRUCT_ROBUST_LIST_HEAD_P, NUM_P, 0,
-        0, 0}, {275, "splice", 6, NUM, NUM, LNUM_P, NUM, LNUM_P, NUM, UNSIGNED},
+        0, 0},
+    {275, "splice", 6, NUM, NUM, LNUM_P, NUM, LNUM_P, NUM, UNSIGNED},
     {276, "tee", 4, NUM, NUM, NUM, NUM, UNSIGNED, 0, 0},
     {277, "sync_file_range", 4, NUM, NUM, OFF64_T, OFF64_T, UNSIGNED, 0, 0},
     {278, "vmsplice", 4, NUM, NUM, CONST_STRUCT_IOVEC_P, UNSIGNED, UNSIGNED, 0,

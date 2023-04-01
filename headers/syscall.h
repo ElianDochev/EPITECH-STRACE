@@ -175,6 +175,10 @@ typedef struct {
     short mask;
 } global_t;
 
+global_t *get_global(int running, short mask, int pid);
+
+void print_string(intptr_t value, char *str);
+
 typedef struct user_regs_struct regs_t;
 
 void fill_args(regs_t *regs, arg_array_t *args);

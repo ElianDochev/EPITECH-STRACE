@@ -7,7 +7,7 @@
 
 #include "syscall.h"
 
-static global_t *get_global(int running, short mask, int pid)
+global_t *get_global(int running, short mask, int pid)
 {
     static global_t global;
 

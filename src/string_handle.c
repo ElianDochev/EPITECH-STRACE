@@ -6,6 +6,7 @@
 */
 
 #include "syscall.h"
+#include <string.h>
 
 static void do_string(intptr_t value, char *str)
 {

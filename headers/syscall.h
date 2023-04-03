@@ -23,114 +23,119 @@
     #include <signal.h>
 
     // would want to replace with a enum but no time
-    #define     NUM         1
-    #define     STRING      2
-    #define     UNSIGNED    3
-    #define     VOID_P      (4)
-    #define     CONST_VOID_P    (5)
-    #define     STRUCT_P    (7)
-    #define     STRUCT_STAT_P   (8)
-    #define     STRUCT_FD_P     (9)
-    #define     PVOID   (12) // used for return type void pointer
-    #define     CONST_KERNEL_SIGSET_T_P     (13)
-    #define     KERNEL_SIGSET_T_P   (14)
-    #define     VARGS   (16)
-    #define     CONST_STRUCT_IOVEC_P    (17)
-    #define     FD_SET_P    (18)
-    #define     STRUCT_TIMEVAL_P    (19)
-    #define     VOID    (20)
-    #define     STRUCT_SHMID_DS_P   (23)
-    #define     CONST_STRUCT_TIMESPEC_P     (24)
-    #define     STRUCT_TIMESPEC_P   (25)
-    #define     STRUCT_ITIMERVAL_P      (26)
-    #define     CONST_STRUCT_ITIMERVAL_P        (28)
-    #define     CONST_STRUCT_SOCKADDR_P     (31)
-    #define     SOCKLEN_T       (32)
-    #define     STRUCT_SOCKADDR_P       (33)
-    #define     SOCKLEN_T_P     (34)
-    #define     CONST_STRUCT_MSGHDR_P       (35)
-    #define     STRUCT_MSGHDR_P     (36)
-    #define     STRUCT_RUSAGE_P     (39)
-    #define     STRUCT_UTSNAME_P        (40)
-    #define     STRUCT_SEMBUF_P     (41)
-    #define     STRUCT_MSQID_DS_P       (43)
-    #define     STRUCT_LINUX_DIRENT_P       (44)
-    #define     MODE_T      (49)
-    #define     UID_T       (51)
-    #define     GID_T       (52)
-    #define     STRUCT_TIMEZONE_P       (53)
-    #define     STRUCT_RLIMIT_P     (54)
-    #define     CLOCK_T     (55)
-    #define     STRUCT_TMS_P        (56)
-    #define     ENUM_____REQUEST        (57)
-    #define     CONST_GID_T_P       (58)
-    #define     UID_T_P     (59)
-    #define     GID_T_P     (60)
-    #define     CAP_USER_HEADER_T       (61)
-    #define     CAP_USER_DATA_T     (62)
-    #define     CONST_CAP_USER_DATA_T       (63)
-    #define     CONST_STACK_T_P     (64)
-    #define     STACK_T_P       (65)
-    #define     CONST_STRUCT_UTIMBUF_P      (66)
-    #define     DEV_T       (67)
-    #define     STRUCT_STATFS_P     (68)
-    #define     ID_T        (69)
-    #define     CONST_STRUCT_SCHED_PARAM_P      (70)
-    #define     STRUCT_SCHED_PARAM_P        (71)
-    #define     STRUCT_TIMESPEC_P_      (72)
-    #define     STRUCT____ARGS_P        (73)
-    #define     STRUCT_TIMEX_P      (74)
-    #define     CONST_STRUCT_RLIMIT_P       (75)
-    #define     CONST_STRUCT_TIMEVAL_P      (76)
-    #define     CONST_STRUCT_TIMEZONE_P     (77)
-    #define     CADDR_T     (78)
-    #define     STRUCT_KERNEL_SYM_P     (79)
-    #define     NUM_P       (80)
-    #define     STRUCT_NFSCTL_ARG_P     (81)
-    #define     UNION_NFSCTL_RES_P      (82)
-    #define     OFF64_T     (83)
-    #define     TIME_T      (84)
-    #define     _T___T_P        (85)
-    #define     CONST_CPU_SET_T_P       (86)
-    #define     CPU_SET_T_P     (87)
-    #define     STRUCT_USER_DESC_P      (88)
-    #define     AIO_CONTEXT_T_P     (90)
-    #define     AIO_CONTEXT_T       (91)
-    #define     STRUCT_IO_EVENT_P       (92)
-    #define     STRUCT_IOCB_P       (93)
-    #define     U64     (94)
-    #define     STRUCT_LINUX_DIRENT64_P     (95)
-    #define     CLOCKID_T       (96)
-    #define     STRUCT_SIGEVENT_P       (97)
-    #define     TIMER_T_P       (98)
-    #define     TIMER_T     (99)
-    #define     CONST_STRUCT_ITIMERSPEC_P       (100)
-    #define     STRUCT_ITIMERSPEC_P     (101)
-    #define     STRUCT_EPOLL_EVENT_P        (102)
-    #define     CONST_STRUCT_TIMEVAL        (103)
-    #define     CONST_UNSIGNED_P        (104)
-    #define     UNSIGNED_P      (105)
-    #define     MQD_T       (106)
-    #define     CONST_STRUCT_SIGEVENT_P     (108)
-    #define     STRUCT_MQ_ATTR_P        (109)
-    #define     STRUCT_KEXEC_SEGMENT_P      (110)
-    #define     IDTYPE_T        (111)
-    #define     SIGINFO_T_P     (112)
-    #define     KEY_SERIAL_T        (113)
-    #define     UNUM32_T        (114)
-    #define     STRUCT_POLLFD_P     (115)
-    #define     CONST_SIGSET_T_P        (116)
-    #define     STRUCT_ROBUST_LIST_HEAD_P       (117)
-    #define     LNUM_P      (118)
-    #define     CONST_NUM_P     (119)
-    #define     CONST_STRUCT_TIMESPEC       (120)
-    #define     STRUCT_PERF_EVENT_ATTR_P        (121)
-    #define     STRUCT_MMSGHDR_P        (122)
-    #define     UNUM64_T        (123)
-    #define     STRUCT_FILE_HANDLE_P        (124)
-    #define     STRUCT__CACHE_P     (126)
-    #define     STRUCT_SCHED_ATTR_P     (127)
-    #define     UNION__ATTR_P       (128)
+
+typedef enum arg_type
+{
+    NUM                             = 1,
+    STRING                          = 2,
+    UNSIGNED                        = 3,
+    VOID_P                          = 4,
+    CONST_VOID_P                    = 5,
+    STRUCT_P                        = 6,
+    STRUCT_STAT_P                   = 7,
+    STRUCT_FD_P                     = 8,
+    CONST_KERNEL_SIGSET_T_P         = 10,
+    KERNEL_SIGSET_T_P               = 11,
+    VARGS                           = 12,
+    CONST_STRUCT_IOVEC_P            = 13,
+    STRUCT_IOVEC_P                  = 14,
+    FD_SET_P                        = 15,
+    STRUCT_TIMEVAL_P                = 16,
+    VOID                            = 17,
+    CONST_STRUCT_ITIMERVAL_P        = 18,
+    STRUCT_ITIMERVAL_P              = 19,
+    CONST_STRUCT_RUSAGE_P           = 20,
+    STRUCT_SHMID_DS_P               = 21,
+    SOCKLEN_T_P                     = 22,
+    SOCKLEN_T                       = 23,
+    CONST_STRUCT_SOCKADDR_P         = 24,
+    STRUCT_SOCKADDR_P               = 25,
+    CONST_STRUCT_MSGHDR_P           = 35,
+    STRUCT_MSGHDR_P                 = 36,
+    STRUCT_RUSAGE_P                 = 39,
+    STRUCT_UTSNAME_P                = 40,
+    STRUCT_SEMBUF_P                 = 41,
+    STRUCT_MSQID_DS_P               = 43,
+    STRUCT_LINUX_DIRENT_P           = 44,
+    MODE_T                          = 49,
+    UID_T                           = 51,
+    GID_T                           = 52,
+    STRUCT_TIMEZONE_P               = 53,
+    STRUCT_RLIMIT_P                 = 54,
+    CLOCK_T                         = 55,
+    STRUCT_TMS_P                    = 56,
+    ENUM_____REQUEST                = 57,
+    CONST_GID_T_P                   = 58,
+    UID_T_P                         = 59,
+    GID_T_P                         = 60,
+    CAP_USER_HEADER_T               = 61,
+    CAP_USER_DATA_T                 = 62,
+    CONST_CAP_USER_DATA_T           = 63,
+    CONST_STACK_T_P                 = 64,
+    STACK_T_P                       = 65,
+    CONST_STRUCT_UTIMBUF_P          = 66,
+    DEV_T                           = 67,
+    STRUCT_STATFS_P                 = 68,
+    ID_T                            = 69,
+    CONST_STRUCT_SCHED_PARAM_P      = 70,
+    STRUCT_SCHED_PARAM_P            = 71,
+    STRUCT_TIMESPEC_P_              = 72,
+    STRUCT____ARGS_P                = 73,
+    STRUCT_TIMEX_P                  = 74,
+    CONST_STRUCT_RLIMIT_P           = 75,
+    CONST_STRUCT_TIMEVAL_P          = 76,
+    CONST_STRUCT_TIMEZONE_P         = 77,
+    CADDR_T                         = 78,
+    STRUCT_KERNEL_SYM_P             = 79,
+    NUM_P                           = 80,
+    STRUCT_NFSCTL_ARG_P             = 81,
+    UNION_NFSCTL_RES_P              = 82,
+    OFF64_T                         = 83,
+    TIME_T                          = 84,
+    _T___T_P                        = 85,
+    CONST_CPU_SET_T_P               = 86,
+    CPU_SET_T_P                     = 87,
+    STRUCT_USER_DESC_P              = 88,
+    AIO_CONTEXT_T_P                 = 90,
+    AIO_CONTEXT_T                   = 91,
+    STRUCT_IO_EVENT_P               = 92,
+    STRUCT_IOCB_P                   = 93,
+    U64                             = 94,
+    STRUCT_LINUX_DIRENT64_P         = 95,
+    CLOCKID_T                       = 96,
+    STRUCT_SIGEVENT_P               = 97,
+    TIMER_T_P                       = 98,
+    TIMER_T                         = 99,
+    CONST_STRUCT_ITIMERSPEC_P       = 100,
+    STRUCT_ITIMERSPEC_P             = 101,
+    STRUCT_EPOLL_EVENT_P            = 102,
+    CONST_STRUCT_TIMEVAL            = 103,
+    CONST_UNSIGNED_P                = 104,
+    UNSIGNED_P                      = 105,
+    MQD_T                           = 106,
+    CONST_STRUCT_SIGEVENT_P         = 108,
+    STRUCT_MQ_ATTR_P                = 109,
+    STRUCT_KEXEC_SEGMENT_P          = 110,
+    IDTYPE_T                        = 111,
+    SIGINFO_T_P                     = 112,
+    KEY_SERIAL_T                    = 113,
+    UNUM32_T                        = 114,
+    STRUCT_POLLFD_P                 = 115,
+    CONST_SIGSET_T_P                = 116,
+    STRUCT_ROBUST_LIST_HEAD_P       = 117,
+    LNUM_P                          = 118,
+    CONST_NUM_P                     = 119,
+    CONST_STRUCT_TIMESPEC           = 120,
+    STRUCT_PERF_EVENT_ATTR_P        = 121,
+    STRUCT_MMSGHDR_P                = 122,
+    UNUM64_T                        = 123,
+    STRUCT_FILE_HANDLE_P            = 124,
+    STRUCT__CACHE_P                 = 126,
+    STRUCT_SCHED_ATTR_P             = 127,
+    UNION__ATTR_P                   = 128,
+    CONST_STRUCT_TIMESPEC_P         = 129,
+    STRUCT_TIMESPEC_P               = 130,
+} arg_type_t;
 
 /* FLAGS*/
     #define DISP_DETAILS 1 << 0
@@ -141,7 +146,7 @@
     #define EXIT_EPI_FAIL 84
 
 /* ERROR */
-    #define ERROR(...) (fprintf(stderr, __VA_ARGS__) && 0)
+    #define ERROR(...) (fprintf(stderr, __VA_ARGS__))
 
 /* syscall table *
     rax - code/ return value
@@ -199,7 +204,7 @@ static const syscall_t table[] = {
     {6, "lstat", 2, NUM, STRING, STRUCT_STAT_P, 0, 0, 0, 0},
     {7, "poll", 3, NUM, STRUCT_FD_P, UNSIGNED, NUM, 0, 0, 0},
     {8, "lseek", 3, NUM, NUM, NUM, NUM, 0, 0, 0},
-    {9, "mmap", 6, PVOID, VOID_P, NUM, NUM, NUM, NUM, NUM},
+    {9, "mmap", 6, VOID_P, VOID_P, NUM, NUM, NUM, NUM, NUM},
     {10, "mprotect", 3, NUM, VOID_P, NUM, NUM, 0, 0, 0},
     {11, "munmap", 2, NUM, VOID_P, NUM, 0, 0, 0, 0},
     {12, "brk", 1, NUM, VOID_P, 0, 0, 0, 0, 0},
@@ -216,12 +221,12 @@ static const syscall_t table[] = {
     {22, "pipe", 1, NUM, NUM, 0, 0, 0, 0, 0},
     {23, "select", 5, NUM, NUM, FD_SET_P, FD_SET_P, FD_SET_P, STRUCT_TIMEVAL_P,
         0}, {24, "sched_yield", 1, NUM, VOID, 0, 0, 0, 0, 0},
-    {25, "mremap", 0, PVOID, 0, 0, 0, 0, 0, 0},
+    {25, "mremap", 0, VOID_P, 0, 0, 0, 0, 0, 0},
     {26, "msync", 3, NUM, VOID_P, NUM, NUM, 0, 0, 0},
     {27, "mincore", 3, NUM, VOID_P, NUM, STRING, 0, 0, 0},
     {28, "madvise", 3, NUM, VOID_P, NUM, NUM, 0, 0, 0},
     {29, "shmget", 3, NUM, NUM, NUM, NUM, 0, 0, 0},
-    {30, "shmat", 3, PVOID, NUM, CONST_VOID_P, NUM, 0, 0, 0},
+    {30, "shmat", 3, VOID_P, NUM, CONST_VOID_P, NUM, 0, 0, 0},
     {31, "shmctl", 3, NUM, NUM, NUM, STRUCT_SHMID_DS_P, 0, 0, 0},
     {32, "dup", 1, NUM, NUM, 0, 0, 0, 0, 0},
     {33, "dup2", 2, NUM, NUM, NUM, 0, 0, 0, 0},
@@ -253,7 +258,7 @@ static const syscall_t table[] = {
     {57, "fork", 1, NUM, VOID, 0, 0, 0, 0, 0},
     {58, "vfork", 1, NUM, VOID, 0, 0, 0, 0, 0},
     {59, "execve", 3, NUM, STRING, STRING, STRING, 0, 0, 0},
-    {60, "exit", 6, 0, 0, 0, 0, 0, 0, 0},
+    {60, "exit", 1, VOID, NUM, 0, 0, 0, 0, 0},
     {61, "wait4", 4, NUM, NUM, NUM_P, NUM, STRUCT_RUSAGE_P, 0, 0},
     {62, "kill", 2, NUM, NUM, NUM, 0, 0, 0, 0},
     {63, "uname", 1, NUM, STRUCT_UTSNAME_P, 0, 0, 0, 0, 0},
@@ -472,7 +477,7 @@ static const syscall_t table[] = {
     {259, "mknodat", 4, NUM, NUM, STRING, MODE_T, DEV_T, 0, 0},
     {260, "fchownat", 5, NUM, NUM, STRING, UID_T, GID_T, NUM, 0},
     {261, "futimesat", 3, NUM, NUM, STRING, CONST_STRUCT_TIMEVAL, 0, 0, 0},
-    {262, "newfstatat", 6, 0, 0, 0, 0, 0, 0, 0},
+    {262, "newfstatat", 4, NUM, NUM, STRING, STRUCT_STAT_P, NUM, 0, 0},
     {263, "unlinkat", 3, NUM, NUM, STRING, NUM, 0, 0, 0},
     {264, "renameat", 4, NUM, NUM, STRING, NUM, STRING, 0, 0},
     {265, "linkat", 5, NUM, NUM, STRING, NUM, STRING, NUM, 0},

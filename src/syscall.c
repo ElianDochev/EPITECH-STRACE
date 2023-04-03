@@ -21,6 +21,7 @@ static int defer(syscall_t *syscall, int index)
         return syscall->arg_five;
     if (index == 5)
         return syscall->arg_six;
+    return -1;
 }
 
 static void print_value(intptr_t value, int type)

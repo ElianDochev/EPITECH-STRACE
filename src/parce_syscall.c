@@ -53,7 +53,6 @@ static void sig_handler(int signo)
 void parce_syscall(short mask, int pid)
 {
     regs_t regs;
-    long data;
     int status;
 
     get_global(1, mask, pid);
@@ -66,7 +65,7 @@ void parce_syscall(short mask, int pid)
         waitpid(pid, &status, 0);
         if (error_check(status, pid, &regs) == -1)
             break;
-        if (regs.orig_rax == -1)
+        if (regs.orig_rax == (size_t) -1)
             continue;
         if (do_syscall(&regs, mask, pid, status) == -1)
             break;

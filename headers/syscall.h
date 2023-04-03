@@ -22,10 +22,7 @@
     #include <sys/wait.h>
     #include <signal.h>
 
-    // would want to replace with a enum but no time
-
-typedef enum arg_type
-{
+typedef enum arg_type {
     NUM                             = 1,
     STRING                          = 2,
     UNSIGNED                        = 3,
